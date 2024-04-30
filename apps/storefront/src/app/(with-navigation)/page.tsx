@@ -41,12 +41,12 @@ const products = [
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ul className="list-none">
+    <section className="">
+      <ul className="list-none mx-auto gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {products.map((product, index) => (
           <ProductListItem key={index} product={product} />
         ))}
       </ul>
-    </main>
+    </section>
   );
 }
