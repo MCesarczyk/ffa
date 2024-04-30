@@ -1,4 +1,4 @@
-import { ProductCoverImage, ProductListItemDescription } from "@/ui/atoms";
+import { ProductCoverImage, ProductListItemDescription } from '../atoms';
 
 interface ProductListItemProps {
   product: {
