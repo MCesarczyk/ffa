@@ -2,12 +2,23 @@
   "name": "@ffa/source",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {},
   "private": true,
-  "dependencies": {},
   "devDependencies": {
     "@nx/js": "17.3.2",
     "@nx/workspace": "17.3.2",
+    "cz-conventional-changelog": "^3.3.0",
     "nx": "17.3.2"
+  },
+  "volta": {
+    "node": "20.12.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
