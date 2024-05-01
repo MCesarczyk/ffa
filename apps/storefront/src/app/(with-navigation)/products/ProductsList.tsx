@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { wait } from '../../../utils';
 
 export async function ProductsList({ page }: { page: number }) {
@@ -13,7 +14,9 @@ export async function ProductsList({ page }: { page: number }) {
   return (
     <>
       {products.map((product) => (
-        <li key={product.id}>{product.title}</li>
+        <li key={product.id}>
+          <Link href={`/products/${product.id}`}>{product.title}</Link>
+        </li>
       ))}
     </>
   );
