@@ -6,7 +6,7 @@ export const Menu = () => {
       <ul className="flex gap-1 bg-slate-900 px-1">
         <NavItem url="/">Home</NavItem>
         <NavItem url="/products">Products</NavItem>
-        <NavItem url="/contact">Contact</NavItem>
+        <NavItem url="/privacy-policy">Privacy policy</NavItem>
       </ul>
     </nav>
   );
