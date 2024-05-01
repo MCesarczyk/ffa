@@ -14,6 +14,7 @@ const nextConfig = {
   },
   experimental: {
     typedRoutes: true,
+    mdxRs: true,
   }
 };
 
@@ -22,4 +23,6 @@ const plugins = [
   withNx,
 ];
 
-module.exports = composePlugins(...plugins)(nextConfig);
+const withMDX = require("@next/mdx")();
+
+module.exports = composePlugins(...plugins)(withMDX(nextConfig));
