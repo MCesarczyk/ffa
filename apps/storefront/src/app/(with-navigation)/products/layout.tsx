@@ -7,7 +7,7 @@ export default async function ProductsLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="mx-auto grid min-h-screen w-full max-w-7xl grid-cols-12 gap-x-8 bg-white">
+    <div className="mx-auto grow grid w-full max-w-7xl grid-cols-12 gap-x-8 bg-white">
       <aside className="col-span-3 px-8 py-4 shadow-xl">
         <h2 className="mb-4 text-xl font-bold">Popular products</h2>
         <Suspense>
