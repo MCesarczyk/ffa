@@ -9,10 +9,17 @@ interface ProductsPageProps {
   };
 }
 
+export async function generateStaticParams({ params }: ProductsPageProps) {
+  const products = await getProducts(Number(params.pageId));
+  return [...Array(Math.ceil(products.length / 4)).keys()].map((page) => ({
+    pageId: String(page + 1),
+  }));
+}
+
 export default async function ProductsPage({
   params: { pageId },
 }: ProductsPageProps) {
-  const results = await getProducts(0);
+  const results = await getProducts();
   const totalPages = Math.ceil(results.length / 4);
 
   return (

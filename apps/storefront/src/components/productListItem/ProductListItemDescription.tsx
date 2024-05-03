@@ -12,7 +12,7 @@ export const ProductListItemDescription = ({
   const { name, category, price } = product;
 
   return (
-    <div>
+    <div className="px-4">
       <h3 className="text-sm font-semibold text-gray-700">{name}</h3>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between text-xs">
         <p className="text-gray-500">{category}</p>

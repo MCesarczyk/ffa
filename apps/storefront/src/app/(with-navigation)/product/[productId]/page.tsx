@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
-import { getProducts, getProduct } from '../../../../products/api';
+import { getProduct } from '../../../../products/api';
 
 export async function generateMetadata({
   params,
@@ -13,10 +13,6 @@ export async function generateMetadata({
     title: product.title,
     description: product.description,
   };
-}
-
-export async function generateStaticParams() {
-  return await getProducts();
 }
 
 export default async function SingleProductPage({
