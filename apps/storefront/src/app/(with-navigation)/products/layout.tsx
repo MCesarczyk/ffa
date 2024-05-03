@@ -1,5 +1,5 @@
 import { ReactNode, Suspense } from 'react';
-import { ProductsList } from './ProductsList';
+import { ProductsList } from './[pageId]/ProductsList';
 
 export default async function ProductsLayout({
   children,

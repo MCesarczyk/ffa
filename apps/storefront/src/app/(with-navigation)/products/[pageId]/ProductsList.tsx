@@ -1,6 +1,6 @@
-import { wait } from '../../../utils';
-import { getProducts } from '../../../products/api';
-import { ProductListItem } from '../../../components/productListItem';
+import { wait } from '../../../../utils';
+import { getProducts } from '../../../../products/api';
+import { ProductListItem } from '../../../../components/productListItem';
 
 export async function ProductsList({ page }: { page: number }) {
   const take = 4;
