@@ -1,1 +1,1 @@
-import '../src/lib/ui.module.scss'
+import '../src/lib/global.css'

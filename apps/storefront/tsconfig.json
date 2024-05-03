@@ -28,7 +28,8 @@
     "**/*.jsx",
     "**/*.mdx",
     "next-env.d.ts",
-    "../../dist/apps/storefront/.next/types/**/*.ts"
+    "../../dist/apps/storefront/.next/types/**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

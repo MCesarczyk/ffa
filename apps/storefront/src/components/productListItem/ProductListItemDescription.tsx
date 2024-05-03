@@ -14,8 +14,10 @@ export const ProductListItemDescription = ({
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-700">{name}</h3>
-      <p className="text-sm text-gray-500">{category}</p>
-      <p className="text-sm font-medium text-gray-900">{price}</p>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between text-xs">
+        <p className="text-gray-500">{category}</p>
+        <p>Price: ${price}</p>
+      </div>
     </div>
   );
 };

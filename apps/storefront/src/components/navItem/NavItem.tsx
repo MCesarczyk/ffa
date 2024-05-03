@@ -15,13 +15,15 @@ export const NavItem = <T extends string>({
 }: NavItemProps<T>) => {
   const pathname = usePathname();
 
+  const isPathanameActive = pathname.endsWith(url);
+
   return (
     <li
       className={`block ${
-        pathname === url ? 'text-red-600' : 'text-white'
+        isPathanameActive ? 'text-red-600' : 'text-white'
       } font-bold bg-blue-700 hover:bg-blue-600 active:bg-blue-800 px-4 py-2`}
     >
-      <Link href={url} aria-current={pathname === url}>
+      <Link href={url} aria-current={isPathanameActive}>
         {children}
       </Link>
     </li>

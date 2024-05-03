@@ -1,7 +1,10 @@
-import { ProductCoverImage, ProductListItemDescription } from '../atoms';
+import Link from 'next/link';
+import { ProductCoverImage } from './ProductCoverImage';
+import { ProductListItemDescription } from './ProductListItemDescription';
 
 interface ProductListItemProps {
   product: {
+    id: string;
     name: string;
     category: string;
     price: string;
@@ -18,7 +21,9 @@ export const ProductListItem = ({ product }: ProductListItemProps) => {
   return (
     <li>
       <article>
-        <ProductCoverImage src={coverImage.src} alt={coverImage.alt} />
+        <Link href={`/products/${product.id}`}>
+          <ProductCoverImage src={coverImage.src} alt={coverImage.alt} />
+        </Link>
         <ProductListItemDescription product={{ name, category, price }} />
       </article>
     </li>

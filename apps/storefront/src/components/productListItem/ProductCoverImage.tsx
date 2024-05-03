@@ -13,7 +13,7 @@ export const ProductCoverImage = ({
         height={320}
         src={src}
         alt={alt}
-        className="h-full object-cover object-center p-4 "
+        className="object-cover object-center p-4 h-full w-full"
       />
     </div>
   );

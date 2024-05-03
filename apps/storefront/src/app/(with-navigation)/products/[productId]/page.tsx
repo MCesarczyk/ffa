@@ -11,6 +11,7 @@ export async function generateMetadata({
 
   return {
     title: product.title,
+    description: product.description,
   };
 }
 
