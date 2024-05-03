@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ffa/graphql-client": ["libs/graphql-client/src/index.ts"],
       "@ffa/ui": ["libs/ui/src/index.ts"]
     }
   },
