@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { ProductsList } from './ProductsList';
 import { getProducts } from '../../../../products/api';
 import { Pagination } from '../../../../components';
-import { ProductsGetListDocument, executeGraphql } from '@ffa/graphql-client';
 
 interface ProductsPageProps {
   params: {
@@ -23,8 +22,6 @@ export default async function ProductsPage({
   const results = await getProducts();
   const totalPages = Math.ceil(results.length / 4);
 
-  const { products } = await executeGraphql(ProductsGetListDocument, {});
-
   return (
     <div>
       <h2 className="mb-4 text-xl font-bold">Products list</h2>
@@ -32,7 +29,6 @@ export default async function ProductsPage({
         <ProductsList page={Number(pageId)} />
       </Suspense>
       <Pagination totalPages={totalPages} />
-      <pre>{JSON.stringify(products, null, 2)}</pre>
     </div>
   );
 }

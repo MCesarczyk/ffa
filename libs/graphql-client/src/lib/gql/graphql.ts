@@ -58,6 +58,7 @@ export type Asset = Entity & Node & {
   localizations: Array<Asset>;
   /** The mime type of the file */
   mimeType?: Maybe<Scalars['String']['output']>;
+  productImageProduct: Array<Product>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -131,6 +132,20 @@ export type AssetLocalizationsArgs = {
 
 
 /** Asset system model */
+export type AssetProductImageProductArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ProductWhereInput>;
+};
+
+
+/** Asset system model */
 export type AssetPublishedAtArgs = {
   variation?: SystemDateTimeFieldVariation;
 };
@@ -196,6 +211,7 @@ export type AssetCreateInput = {
   imageDog?: InputMaybe<DogCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
+  productImageProduct?: InputMaybe<ProductCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** Optionally the system can upload a file for you, for that you need to provide a publicly accessible url */
   uploadUrl?: InputMaybe<Scalars['String']['input']>;
@@ -293,6 +309,9 @@ export type AssetManyWhereInput = {
   imageDog_every?: InputMaybe<DogWhereInput>;
   imageDog_none?: InputMaybe<DogWhereInput>;
   imageDog_some?: InputMaybe<DogWhereInput>;
+  productImageProduct_every?: InputMaybe<ProductWhereInput>;
+  productImageProduct_none?: InputMaybe<ProductWhereInput>;
+  productImageProduct_some?: InputMaybe<ProductWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -377,6 +396,7 @@ export type AssetUpdateInput = {
   imageDog?: InputMaybe<DogUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
+  productImageProduct?: InputMaybe<ProductUpdateManyInlineInput>;
   /** Use this to define if its a reupload for the asset */
   reUpload?: InputMaybe<Scalars['Boolean']['input']>;
   /** Optionally the system can upload a file for you, for that you need to provide a publicly accessible url */
@@ -738,6 +758,9 @@ export type AssetWhereInput = {
   mimeType_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   mimeType_starts_with?: InputMaybe<Scalars['String']['input']>;
+  productImageProduct_every?: InputMaybe<ProductWhereInput>;
+  productImageProduct_none?: InputMaybe<ProductWhereInput>;
+  productImageProduct_some?: InputMaybe<ProductWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2120,6 +2143,7 @@ export type PageInfo = {
 };
 
 export type Product = Entity & Node & {
+  category?: Maybe<Scalars['String']['output']>;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -2131,6 +2155,7 @@ export type Product = Entity & Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
+  image?: Maybe<Asset>;
   longDescription?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   price?: Maybe<Scalars['Int']['output']>;
@@ -2138,6 +2163,8 @@ export type Product = Entity & Node & {
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
   publishedBy?: Maybe<User>;
+  rateCount?: Maybe<Scalars['Int']['output']>;
+  rating?: Maybe<Scalars['Int']['output']>;
   scheduledIn: Array<ScheduledOperation>;
   /** System stage field */
   stage: Stage;
@@ -2165,6 +2192,13 @@ export type ProductHistoryArgs = {
   limit?: Scalars['Int']['input'];
   skip?: Scalars['Int']['input'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type ProductImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  where?: InputMaybe<AssetSingleRelationWhereInput>;
 };
 
 
@@ -2208,11 +2242,15 @@ export type ProductConnection = {
 };
 
 export type ProductCreateInput = {
+  category?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<AssetCreateOneInlineInput>;
   longDescription?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Int']['input']>;
+  rateCount?: InputMaybe<Scalars['Int']['input']>;
+  rating?: InputMaybe<Scalars['Int']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
@@ -2248,6 +2286,25 @@ export type ProductManyWhereInput = {
   OR?: InputMaybe<Array<ProductWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  category_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  category_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  category_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  category_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  category_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  category_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  category_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  category_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  category_starts_with?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2305,6 +2362,7 @@ export type ProductManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
   longDescription?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   longDescription_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2374,6 +2432,36 @@ export type ProductManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   publishedBy?: InputMaybe<UserWhereInput>;
+  rateCount?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  rateCount_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  rateCount_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  rateCount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  rateCount_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  rateCount_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  rateCount_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  rateCount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  rating?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  rating_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  rating_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  rating_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  rating_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  rating_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  rating_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
@@ -2396,6 +2484,8 @@ export type ProductManyWhereInput = {
 };
 
 export type ProductOrderByInput =
+  | 'category_ASC'
+  | 'category_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'description_ASC'
@@ -2410,14 +2500,22 @@ export type ProductOrderByInput =
   | 'price_DESC'
   | 'publishedAt_ASC'
   | 'publishedAt_DESC'
+  | 'rateCount_ASC'
+  | 'rateCount_DESC'
+  | 'rating_ASC'
+  | 'rating_DESC'
   | 'updatedAt_ASC'
   | 'updatedAt_DESC';
 
 export type ProductUpdateInput = {
+  category?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<AssetUpdateOneInlineInput>;
   longDescription?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Int']['input']>;
+  rateCount?: InputMaybe<Scalars['Int']['input']>;
+  rating?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ProductUpdateManyInlineInput = {
@@ -2438,10 +2536,13 @@ export type ProductUpdateManyInlineInput = {
 };
 
 export type ProductUpdateManyInput = {
+  category?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   longDescription?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Int']['input']>;
+  rateCount?: InputMaybe<Scalars['Int']['input']>;
+  rating?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ProductUpdateManyWithNestedWhereInput = {
@@ -2503,6 +2604,25 @@ export type ProductWhereInput = {
   OR?: InputMaybe<Array<ProductWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  category_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  category_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  category_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  category_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  category_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  category_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  category_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  category_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  category_starts_with?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2560,6 +2680,7 @@ export type ProductWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
   longDescription?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   longDescription_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2629,6 +2750,36 @@ export type ProductWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   publishedBy?: InputMaybe<UserWhereInput>;
+  rateCount?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  rateCount_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  rateCount_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  rateCount_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  rateCount_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  rateCount_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  rateCount_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  rateCount_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  rating?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  rating_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  rating_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  rating_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  rating_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  rating_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  rating_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
@@ -4489,7 +4640,7 @@ export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null,
 export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, longDescription?: string | null, price?: number | null, category?: string | null, image?: { url: string, fileName: string } | null }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -4523,11 +4674,17 @@ export const DogsGetListDocument = new TypedDocumentString(`
     `) as unknown as TypedDocumentString<DogsGetListQuery, DogsGetListQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList {
-  products(first: 10) {
+  products {
     id
     name
     description
+    longDescription
     price
+    category
+    image {
+      url
+      fileName
+    }
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;

@@ -1,12 +1,13 @@
 import { DogsGetListDocument, executeGraphql } from '@ffa/graphql-client';
 import { DogListItem } from '../../../components/dogListItem';
 import { DogDto } from '../../../dogs/types';
+import { notFound } from 'next/navigation';
 
 export default async function Home() {
   const { dogs } = await executeGraphql(DogsGetListDocument, {});
 
   if (!dogs) {
-    return <p>Loading...</p>;
+    return notFound();
   }
 
   return (

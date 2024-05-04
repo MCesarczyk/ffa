@@ -1,6 +1,6 @@
 export type ProductDto = {
   id: string;
-  title: string;
+  name: string;
   price: number;
   description: string;
   category: string;
@@ -8,6 +8,10 @@ export type ProductDto = {
     rate: number,
     count: number
   },
-  image: string;
+  image: {
+    url: string;
+    fileName: string;
+    id: string;
+  };
   longDescription: string;
 }
