@@ -1,3 +1,4 @@
+import { DogsGetListDocument, executeGraphql } from '@ffa/graphql-client';
 import { ProductListItem } from '../../components/productListItem';
 
 const products = [
@@ -43,7 +44,9 @@ const products = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { dogs } = await executeGraphql(DogsGetListDocument, {});
+
   return (
     <section>
       <ul className="list-none mx-auto gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -51,6 +54,7 @@ export default function Home() {
           <ProductListItem key={index} product={product} />
         ))}
       </ul>
+      <pre>{JSON.stringify(dogs, null, 2)}</pre>
     </section>
   );
 }
