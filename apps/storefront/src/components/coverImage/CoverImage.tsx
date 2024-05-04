@@ -1,11 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-export const ProductCoverImage = ({
-  src,
-  alt,
-}: {
-  src: string;
-  alt: string;
-}) => {
+export const CoverImage = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <div className="aspect-square self-start overflow-hidden rounded-md bg-slate-50 hover:bg-slate-100 text-black">
       <img

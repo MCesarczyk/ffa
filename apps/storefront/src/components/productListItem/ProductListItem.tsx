@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ProductCoverImage } from './ProductCoverImage';
+import { CoverImage } from '../coverImage';
 import { ProductListItemDescription } from './ProductListItemDescription';
 
 interface ProductListItemProps {
@@ -22,7 +22,7 @@ export const ProductListItem = ({ product }: ProductListItemProps) => {
     <li>
       <article>
         <Link href={`/product/${product.id}`}>
-          <ProductCoverImage src={coverImage.src} alt={coverImage.alt} />
+          <CoverImage src={coverImage.src} alt={coverImage.alt} />
         </Link>
         <ProductListItemDescription product={{ name, category, price }} />
       </article>

@@ -6,9 +6,8 @@ query DogsGetList {
     price
     image {
       id
-      width
-      height
       url
+      fileName
     }
   }
 }

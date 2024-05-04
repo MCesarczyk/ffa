@@ -4484,7 +4484,7 @@ export type _SystemDateTimeFieldVariation =
 export type DogsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, width?: number | null, height?: number | null, url: string } | null }> };
+export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, url: string, fileName: string } | null }> };
 
 export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4515,9 +4515,8 @@ export const DogsGetListDocument = new TypedDocumentString(`
     price
     image {
       id
-      width
-      height
       url
+      fileName
     }
   }
 }
