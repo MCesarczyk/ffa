@@ -18,7 +18,7 @@ const meta = {
       id: 'ujfe-op49-3rje-8er8-9iuj',
       name: 'Buddy',
       breed: 'Husky',
-      price: '$1000',
+      price: 1000,
       image: {
         url: 'https://via.placeholder.com/320',
         fileName: 'Product cover image',

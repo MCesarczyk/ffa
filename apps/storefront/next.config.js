@@ -15,6 +15,14 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
     mdxRs: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "eu-central-1-shared-euc1-02.graphassets.com",
+      }
+    ]
   }
 };
 

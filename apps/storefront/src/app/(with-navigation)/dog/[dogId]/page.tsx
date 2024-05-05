@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
 import { getDogById } from '../../../../dogs/api';
+import NextImage from 'next/image';
 
 export async function generateMetadata({
   params,
@@ -25,7 +26,7 @@ export default async function DogDetailsPage({
   return (
     <main className="mx-auto max-w-xl flex flex-col gap-4">
       <h1 className="mb-4 text-3xl font-bold">{dog.name}</h1>
-      <img
+      <NextImage
         src={dog.image.url}
         alt={dog.name}
         width={400}
