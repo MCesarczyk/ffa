@@ -1,10 +1,10 @@
-import { DogsGetListDocument, executeGraphql } from '@ffa/graphql-client';
+import { notFound } from 'next/navigation';
 import { DogListItem } from '../../../components/dogListItem';
 import { DogDto } from '../../../dogs/types';
-import { notFound } from 'next/navigation';
+import { getDogs } from '../../../dogs/api';
 
 export default async function Home() {
-  const { dogs } = await executeGraphql(DogsGetListDocument, {});
+  const dogs = await getDogs();
 
   if (!dogs) {
     return notFound();

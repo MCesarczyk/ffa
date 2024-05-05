@@ -1,5 +1,5 @@
-query DogsGetList($first: Int, $skip: Int) {
-  dogs(first: $first, skip: $skip) {
+query DogGetById($id: ID!) {
+  dog(where: { id: $id }) {
     id
     name
     breed

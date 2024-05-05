@@ -7,13 +7,13 @@ interface DogListItemProps {
   dog: DogDto;
 }
 
-export const DogListItem = ({ dog: product }: DogListItemProps) => {
-  const { name, breed, price, image } = product;
+export const DogListItem = ({ dog }: DogListItemProps) => {
+  const { name, breed, price, image } = dog;
 
   return (
     <li>
       <article>
-        <Link href={`/product/${product.id}`}>
+        <Link href={`/dog/${dog.id}`}>
           <CoverImage
             src={image.url}
             alt={image.fileName.replace('.webp', '').replace('-', ' ')}

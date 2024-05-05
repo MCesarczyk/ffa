@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next';
 import { getProduct } from '../../../../products/api';
+import NextImage from 'next/image';
 
 export async function generateMetadata({
   params,
@@ -25,12 +26,12 @@ export default async function SingleProductPage({
   return (
     <main className="mx-auto max-w-xl flex flex-col gap-4">
       <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
-      <img
+      <NextImage
         src={product.image.url}
         alt={product.name}
         width={400}
         height={400}
-        className="aspect-square"
+        className="object-cover object-center p-4 h-full w-fulls"
       />
       <p className="italic">{product.description}</p>
       <div className="flex flex-col md:flex-row justify-between">

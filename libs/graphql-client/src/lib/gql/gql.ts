@@ -14,7 +14,8 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query DogsGetList {\n  dogs {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogsGetListDocument,
+    "query DogGetById($id: ID!) {\n  dog(where: {id: $id}) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogGetByIdDocument,
+    "query DogsGetList($first: Int, $skip: Int) {\n  dogs(first: $first, skip: $skip) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogsGetListDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    id\n    name\n    description\n    longDescription\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n    rating\n    rateCount\n  }\n}": types.ProductGetByIdDocument,
     "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.ProductsGetListDocument,
 };
@@ -22,7 +23,11 @@ const documents = {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query DogsGetList {\n  dogs {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').DogsGetListDocument;
+export function graphql(source: "query DogGetById($id: ID!) {\n  dog(where: {id: $id}) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').DogGetByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query DogsGetList($first: Int, $skip: Int) {\n  dogs(first: $first, skip: $skip) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').DogsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
