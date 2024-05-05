@@ -2,7 +2,7 @@ interface DogListItemDescriptionProps {
   product: {
     name: string;
     breed: string;
-    price: string;
+    price: number;
   };
 }
 

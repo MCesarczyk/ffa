@@ -30,7 +30,7 @@ export default async function SingleProductPage({
         alt={product.name}
         width={400}
         height={400}
-        className="aspect-square"
+        className="object-cover object-center p-4 h-full w-fulls"
       />
       <p className="italic">{product.description}</p>
       <div className="flex flex-col md:flex-row justify-between">
