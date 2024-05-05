@@ -25,11 +25,6 @@ const meta = {
         id: 'ujfe-op49-3rje-8er8-9iuj',
       },
       description: 'Product description',
-      longDescription: 'Product long description',
-      rating: {
-        rate: 4.5,
-        count: 100,
-      },
     },
   },
 } satisfies Meta<typeof ProductListItem>;
