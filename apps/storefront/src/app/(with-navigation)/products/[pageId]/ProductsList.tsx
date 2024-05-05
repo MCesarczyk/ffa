@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
-import { ProductsGetListDocument, executeGraphql } from '@ffa/graphql-client';
 import { ProductListItem } from '../../../../components/productListItem';
 import { ProductDto } from '../../../../products/types';
+import { getProducts } from '../../../../products/api';
 
 export async function ProductsList({ page }: { page: number }) {
-  const { products } = await executeGraphql(ProductsGetListDocument, {});
+  const products = await getProducts(page, 4);
 
   if (!products) {
     return notFound();

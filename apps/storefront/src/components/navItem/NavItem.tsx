@@ -16,7 +16,7 @@ export const NavItem = <T extends string>({
 }: NavItemProps<T>) => {
   const pathname = usePathname();
 
-  const isPathanameActive = pathname?.endsWith(url);
+  const isPathanameActive = pathname?.includes(url);
 
   return (
     <li key={url}>

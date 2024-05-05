@@ -4637,10 +4637,13 @@ export type DogsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, url: string, fileName: string } | null }> };
 
-export type ProductsGetListQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsGetListQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, longDescription?: string | null, price?: number | null, category?: string | null, image?: { url: string, fileName: string } | null }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, longDescription?: string | null, price?: number | null, category?: string | null, image?: { id: string, url: string, fileName: string } | null }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -4673,8 +4676,8 @@ export const DogsGetListDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<DogsGetListQuery, DogsGetListQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList {
-  products {
+    query ProductsGetList($first: Int, $skip: Int) {
+  products(first: $first, skip: $skip) {
     id
     name
     description
@@ -4682,6 +4685,7 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     price
     category
     image {
+      id
       url
       fileName
     }

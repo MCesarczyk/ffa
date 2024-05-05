@@ -16,7 +16,7 @@ const meta = {
   args: {
     dog: {
       id: 'ujfe-op49-3rje-8er8-9iuj',
-      name: 'Product name',
+      name: 'Buddy',
       breed: 'Husky',
       price: '$1000',
       image: {
