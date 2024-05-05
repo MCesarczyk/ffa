@@ -5,11 +5,17 @@
   "engines": {
     "node": ">=20 <21"
   },
-  "scripts": {},
+  "scripts": {
+    "codegen": "graphql-codegen --config libs/graphql-client/.graphqlrc.ts"
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/client-preset": "4.2.5",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@next/env": "^14.2.3",
     "@nx/devkit": "17.3.2",
     "@nx/eslint": "17.3.2",
     "@nx/eslint-plugin": "17.3.2",

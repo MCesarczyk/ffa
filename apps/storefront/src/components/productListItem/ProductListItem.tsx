@@ -1,30 +1,27 @@
 import Link from 'next/link';
-import { ProductCoverImage } from './ProductCoverImage';
+import { CoverImage } from '../coverImage';
+import { ProductDto } from '../../products/types';
 import { ProductListItemDescription } from './ProductListItemDescription';
 
 interface ProductListItemProps {
-  product: {
-    id: string;
-    name: string;
-    category: string;
-    price: string;
-    coverImage: {
-      src: string;
-      alt: string;
-    };
-  };
+  product: ProductDto;
 }
 
 export const ProductListItem = ({ product }: ProductListItemProps) => {
-  const { name, category, price, coverImage } = product;
+  const { name, category, price, image } = product;
 
   return (
     <li>
-      <article>
+      <article className="max-w-sm">
         <Link href={`/product/${product.id}`}>
-          <ProductCoverImage src={coverImage.src} alt={coverImage.alt} />
+          <CoverImage
+            src={image.url}
+            alt={image.fileName.replace('.jpg', '').replace('-', ' ')}
+          />
         </Link>
-        <ProductListItemDescription product={{ name, category, price }} />
+        <ProductListItemDescription
+          product={{ name, category, price: String(price) }}
+        />
       </article>
     </li>
   );

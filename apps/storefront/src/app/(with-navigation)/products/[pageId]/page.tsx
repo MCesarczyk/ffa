@@ -20,7 +20,7 @@ export default async function ProductsPage({
   params: { pageId },
 }: ProductsPageProps) {
   const results = await getProducts();
-  const totalPages = Math.ceil(results.length / 4);
+  const totalPages = Math.floor(results.length / 4);
 
   return (
     <div>

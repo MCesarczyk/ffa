@@ -18,11 +18,13 @@ const meta = {
       id: 'ujfe-op49-3rje-8er8-9iuj',
       name: 'Product name',
       category: 'Product description',
-      price: '$100',
-      coverImage: {
-        src: 'https://via.placeholder.com/320',
-        alt: 'Product cover image',
+      price: 100000,
+      image: {
+        url: 'https://via.placeholder.com/320',
+        fileName: 'Product cover image',
+        id: 'ujfe-op49-3rje-8er8-9iuj',
       },
+      description: 'Product description',
     },
   },
 } satisfies Meta<typeof ProductListItem>;

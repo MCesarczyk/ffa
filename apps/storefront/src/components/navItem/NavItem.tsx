@@ -16,17 +16,18 @@ export const NavItem = <T extends string>({
 }: NavItemProps<T>) => {
   const pathname = usePathname();
 
-  const isPathanameActive = pathname?.endsWith(url);
+  const isPathanameActive = pathname?.includes(url);
 
   return (
-    <li
-      key={url}
-      className={`block ${
-        isPathanameActive ? 'text-red-600' : 'text-white'
-      } font-bold bg-blue-700 hover:bg-blue-600 active:bg-blue-800 px-4 py-2`}
-    >
+    <li key={url}>
       <Link href={url} aria-current={isPathanameActive}>
-        {children}
+        <div
+          className={`block ${
+            isPathanameActive ? 'text-red-600' : 'text-white'
+          } text-xl font-bold bg-blue-700 hover:bg-blue-600 active:bg-blue-800 px-4 py-1`}
+        >
+          {children}
+        </div>
       </Link>
     </li>
   );

@@ -1,0 +1,13 @@
+query DogsGetList {
+  dogs {
+    id
+    name
+    breed
+    price
+    image {
+      id
+      url
+      fileName
+    }
+  }
+}
