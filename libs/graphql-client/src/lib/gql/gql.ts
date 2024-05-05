@@ -15,7 +15,8 @@ import * as types from './graphql';
  */
 const documents = {
     "query DogsGetList {\n  dogs {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogsGetListDocument,
-    "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    longDescription\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.ProductsGetListDocument,
+    "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    id\n    name\n    description\n    longDescription\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n    rating\n    rateCount\n  }\n}": types.ProductGetByIdDocument,
+    "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.ProductsGetListDocument,
 };
 
 /**
@@ -25,7 +26,11 @@ export function graphql(source: "query DogsGetList {\n  dogs {\n    id\n    name
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    longDescription\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    id\n    name\n    description\n    longDescription\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n    rating\n    rateCount\n  }\n}"): typeof import('./graphql').ProductGetByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 
 
 export function graphql(source: string) {

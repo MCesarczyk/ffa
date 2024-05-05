@@ -10,7 +10,7 @@ export async function generateMetadata({
   const product = await getProduct(params.productId);
 
   return {
-    title: product.title,
+    title: product.name,
     description: product.description,
   };
 }
@@ -24,10 +24,10 @@ export default async function SingleProductPage({
 
   return (
     <main className="mx-auto max-w-xl flex flex-col gap-4">
-      <h1 className="mb-4 text-3xl font-bold">{product.title}</h1>
+      <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
       <img
-        src={product.image}
-        alt={product.title}
+        src={product.image.url}
+        alt={product.name}
         width={400}
         height={400}
         className="aspect-square"
@@ -36,9 +36,9 @@ export default async function SingleProductPage({
       <div className="flex flex-col md:flex-row justify-between">
         <p>Price: ${product.price}</p>
         <p>
-          Rate: {product.rating.rate}
+          Rate: {product.rating}
           {'/'}
-          <span className="text-xs">{product.rating.count}</span>
+          <span className="text-xs">{product.rateCount}</span>
         </p>
       </div>
       <p className="italic text-sm">{product.longDescription}</p>

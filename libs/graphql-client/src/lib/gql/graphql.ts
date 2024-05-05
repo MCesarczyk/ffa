@@ -4637,13 +4637,20 @@ export type DogsGetListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, url: string, fileName: string } | null }> };
 
+export type ProductGetByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductGetByIdQuery = { product?: { id: string, name?: string | null, description?: string | null, longDescription?: string | null, price?: number | null, category?: string | null, rating?: number | null, rateCount?: number | null, image?: { id: string, url: string, fileName: string } | null } | null };
+
 export type ProductsGetListQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, longDescription?: string | null, price?: number | null, category?: string | null, image?: { id: string, url: string, fileName: string } | null }> };
+export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null, category?: string | null, image?: { id: string, url: string, fileName: string } | null }> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -4675,13 +4682,31 @@ export const DogsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<DogsGetListQuery, DogsGetListQueryVariables>;
+export const ProductGetByIdDocument = new TypedDocumentString(`
+    query ProductGetById($id: ID!) {
+  product(where: {id: $id}) {
+    id
+    name
+    description
+    longDescription
+    price
+    category
+    image {
+      id
+      url
+      fileName
+    }
+    rating
+    rateCount
+  }
+}
+    `) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($first: Int, $skip: Int) {
   products(first: $first, skip: $skip) {
     id
     name
     description
-    longDescription
     price
     category
     image {

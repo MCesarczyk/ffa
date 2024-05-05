@@ -1,8 +1,9 @@
-query ProductsGetList($first: Int, $skip: Int) {
-  products(first: $first, skip: $skip) {
+query ProductGetById($id: ID!) {
+  product(where: { id: $id }) {
     id
     name
     description
+    longDescription
     price
     category
     image {
@@ -10,5 +11,7 @@ query ProductsGetList($first: Int, $skip: Int) {
       url
       fileName
     }
+    rating
+    rateCount
   }
 }

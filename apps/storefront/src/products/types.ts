@@ -4,14 +4,15 @@ export type ProductDto = {
   price: number;
   description: string;
   category: string;
-  rating: {
-    rate: number,
-    count: number
-  },
   image: {
     url: string;
     fileName: string;
     id: string;
   };
+}
+
+export type ProductDetailsDto = ProductDto & {
+  rating: number;
+  rateCount: number;
   longDescription: string;
 }
