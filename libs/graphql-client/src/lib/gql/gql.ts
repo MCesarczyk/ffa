@@ -20,6 +20,8 @@ const documents = {
     "mutation CartPublish($id: ID!) {\n  publishOrder(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}": types.CartPublishDocument,
     "query DogGetById($id: ID!) {\n  dog(where: {id: $id}) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogGetByIdDocument,
     "query DogsGetList($first: Int, $skip: Int) {\n  dogs(first: $first, skip: $skip) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogsGetListDocument,
+    "mutation OrderItemCreate($cartId: ID!, $productId: ID!, $total: Int!) {\n  createOrderItem(\n    data: {quantity: 1, total: $total, orderId: {connect: {id: $cartId}}, product: {connect: {id: $productId}}}\n  ) {\n    id\n  }\n}": types.OrderItemCreateDocument,
+    "mutation OrderItemPublish($id: ID!) {\n  publishOrderItem(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}": types.OrderItemPublishDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    id\n    name\n    description\n    longDescription\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n    rating\n    rateCount\n  }\n}": types.ProductGetByIdDocument,
     "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    price\n    category\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.ProductsGetListDocument,
 };
@@ -48,6 +50,14 @@ export function graphql(source: "query DogGetById($id: ID!) {\n  dog(where: {id:
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query DogsGetList($first: Int, $skip: Int) {\n  dogs(first: $first, skip: $skip) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').DogsGetListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation OrderItemCreate($cartId: ID!, $productId: ID!, $total: Int!) {\n  createOrderItem(\n    data: {quantity: 1, total: $total, orderId: {connect: {id: $cartId}}, product: {connect: {id: $productId}}}\n  ) {\n    id\n  }\n}"): typeof import('./graphql').OrderItemCreateDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation OrderItemPublish($id: ID!) {\n  publishOrderItem(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}"): typeof import('./graphql').OrderItemPublishDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

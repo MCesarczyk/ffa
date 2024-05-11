@@ -6053,6 +6053,22 @@ export type DogsGetListQueryVariables = Exact<{
 
 export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, url: string, fileName: string } | null }> };
 
+export type OrderItemCreateMutationVariables = Exact<{
+  cartId: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+  total: Scalars['Int']['input'];
+}>;
+
+
+export type OrderItemCreateMutation = { createOrderItem?: { id: string } | null };
+
+export type OrderItemPublishMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type OrderItemPublishMutation = { publishOrderItem?: { id: string } | null };
+
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -6175,6 +6191,22 @@ export const DogsGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<DogsGetListQuery, DogsGetListQueryVariables>;
+export const OrderItemCreateDocument = new TypedDocumentString(`
+    mutation OrderItemCreate($cartId: ID!, $productId: ID!, $total: Int!) {
+  createOrderItem(
+    data: {quantity: 1, total: $total, orderId: {connect: {id: $cartId}}, product: {connect: {id: $productId}}}
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<OrderItemCreateMutation, OrderItemCreateMutationVariables>;
+export const OrderItemPublishDocument = new TypedDocumentString(`
+    mutation OrderItemPublish($id: ID!) {
+  publishOrderItem(where: {id: $id}, to: PUBLISHED) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<OrderItemPublishMutation, OrderItemPublishMutationVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(where: {id: $id}) {
