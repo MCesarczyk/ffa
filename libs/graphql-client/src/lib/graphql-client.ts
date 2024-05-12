@@ -1,5 +1,6 @@
-import { TypedDocumentString } from "./gql/graphql";
-import { GraphQLResponse } from "./types";
+import { type TypedDocumentString } from "./gql/graphql";
+import { type GraphQLResponse } from "./types";
+
 
 export const executeGraphql = async <TResult, TVariables>(
   query: TypedDocumentString<TResult, TVariables>,
@@ -17,6 +18,7 @@ export const executeGraphql = async <TResult, TVariables>(
     }),
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env["GRAPHQL_TOKEN"]}`,
     },
   });
 

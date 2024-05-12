@@ -6062,12 +6062,28 @@ export type OrderItemCreateMutationVariables = Exact<{
 
 export type OrderItemCreateMutation = { createOrderItem?: { id: string } | null };
 
+export type OrderItemDeleteMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type OrderItemDeleteMutation = { deleteOrderItem?: { id: string } | null };
+
 export type OrderItemPublishMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
 export type OrderItemPublishMutation = { publishOrderItem?: { id: string } | null };
+
+export type OrderItemUpdateQuantityMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  quantity: Scalars['Int']['input'];
+  total: Scalars['Int']['input'];
+}>;
+
+
+export type OrderItemUpdateQuantityMutation = { updateOrderItem?: { quantity?: number | null, total?: number | null } | null };
 
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -6200,6 +6216,13 @@ export const OrderItemCreateDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<OrderItemCreateMutation, OrderItemCreateMutationVariables>;
+export const OrderItemDeleteDocument = new TypedDocumentString(`
+    mutation OrderItemDelete($id: ID!) {
+  deleteOrderItem(where: {id: $id}) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<OrderItemDeleteMutation, OrderItemDeleteMutationVariables>;
 export const OrderItemPublishDocument = new TypedDocumentString(`
     mutation OrderItemPublish($id: ID!) {
   publishOrderItem(where: {id: $id}, to: PUBLISHED) {
@@ -6207,6 +6230,14 @@ export const OrderItemPublishDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<OrderItemPublishMutation, OrderItemPublishMutationVariables>;
+export const OrderItemUpdateQuantityDocument = new TypedDocumentString(`
+    mutation OrderItemUpdateQuantity($id: ID!, $quantity: Int!, $total: Int!) {
+  updateOrderItem(where: {id: $id}, data: {quantity: $quantity, total: $total}) {
+    quantity
+    total
+  }
+}
+    `) as unknown as TypedDocumentString<OrderItemUpdateQuantityMutation, OrderItemUpdateQuantityMutationVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(where: {id: $id}) {

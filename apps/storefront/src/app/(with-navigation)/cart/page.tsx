@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { CartGetByIdDocument, executeGraphql } from '@ffa/graphql-client';
 import { formatMoney } from '../../../utils';
+import { UpdateButtons } from './UpdateButtons';
 
 export default async function CartPage() {
   const cartId = cookies().get('cartId')?.value;
@@ -24,6 +25,8 @@ export default async function CartPage() {
     redirect('/');
   }
 
+  console.log(cart);
+
   const onFormSubmit = async () => {
     'use server';
 
@@ -35,10 +38,10 @@ export default async function CartPage() {
       <h1>Order #{cart.id} summary</h1>
       <table>
         <thead>
-          <tr>
+          <tr className="grid grid-cols-3 gap-2">
             <th>Product</th>
+            <th>Total</th>
             <th>Quantity</th>
-            <th>Total:</th>
           </tr>
         </thead>
         <tbody>
@@ -49,9 +52,13 @@ export default async function CartPage() {
 
             return (
               <tr key={item.id}>
-                <td>{item.quantity}</td>
-                <td>{formatMoney(item.total || 0)}</td>
-                <td></td>
+                <td className="pr-4">{item.product.name}</td>
+                {item.total ? <td>{formatMoney(item.total)}</td> : null}
+                <td>
+                  {item.quantity ? (
+                    <UpdateButtons itemId={item.id} quantity={item.quantity} />
+                  ) : null}
+                </td>
               </tr>
             );
           })}

@@ -45,12 +45,6 @@
             "disallowTypeAnnotations": false
           }
         ],
-        "import/no-duplicates": [
-          "error",
-          {
-            "prefer-inline": true
-          }
-        ],
         "import/namespace": [
           "off"
         ]

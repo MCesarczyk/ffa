@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { CartCreateDocument, CartGetByIdDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
 
 export async function getOrCreateCart() {
@@ -56,6 +57,7 @@ async function addProductToCart(cartId: string, productId: string) {
   }
 
   console.log(`Product ${product.id} added to cart`);
+  revalidatePath(`/cart`);
 }
 
 export async function addProductToCartAction(formData: FormData) {
