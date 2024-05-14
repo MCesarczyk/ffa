@@ -27,7 +27,8 @@ export const executeGraphql = async <TResult, TVariables>({
       variables,
     }),
     cache,
-    // @ts-expect-error (@typescript/eslint/ban-ts-comment)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     next,
     headers: {
       ...headers,
