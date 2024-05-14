@@ -1,11 +1,21 @@
 import { type TypedDocumentString } from "./gql/graphql";
 import { type GraphQLResponse } from "./types";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type NextFetchRequestConfig = any;
 
-
-export const executeGraphql = async <TResult, TVariables>(
+export const executeGraphql = async <TResult, TVariables>({
+  query,
+  variables,
+  cache,
+  headers,
+  next,
+}: {
   query: TypedDocumentString<TResult, TVariables>,
   variables: TVariables,
-): Promise<TResult> => {
+  cache?: RequestCache,
+  headers?: HeadersInit,
+  next?: NextFetchRequestConfig | undefined
+} & (TVariables extends { [key: string]: never } ? { variables?: never } : { variables: TVariables })): Promise<TResult> => {
   if (!process.env["GRAPHQL_URL"]) {
     throw TypeError("GRAPHQL_URL is not defined");
   }
@@ -16,7 +26,11 @@ export const executeGraphql = async <TResult, TVariables>(
       query,
       variables,
     }),
+    cache,
+    // @ts-expect-error (@typescript/eslint/ban-ts-comment)
+    next,
     headers: {
+      ...headers,
       "Content-Type": "application/json",
       "Authorization": `Bearer ${process.env["GRAPHQL_TOKEN"]}`,
     },

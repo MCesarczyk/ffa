@@ -4,15 +4,15 @@ import { OrderItemDeleteDocument, OrderItemPublishDocument, OrderItemUpdateQuant
 import { revalidatePath } from "next/cache";
 
 export const changeItemQuantity = (itemId: string, quantity: number) => {
-  const response = executeGraphql(OrderItemUpdateQuantityDocument, { id: itemId, quantity, total: 0 });
-  executeGraphql(OrderItemPublishDocument, { id: itemId });
+  const response = executeGraphql({ query: OrderItemUpdateQuantityDocument, variables: { id: itemId, quantity, total: 0 } });
+  executeGraphql({ query: OrderItemPublishDocument, variables: { id: itemId } });
   revalidatePath(`/cart`);
 
   return response;
 }
 
 export const removeItem = (itemId: string) => {
-  const response = executeGraphql(OrderItemDeleteDocument, { id: itemId });
+  const response = executeGraphql({ query: OrderItemDeleteDocument, variables: { id: itemId } });
   revalidatePath(`/cart`);
 
   return response;

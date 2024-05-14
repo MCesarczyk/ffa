@@ -17,7 +17,7 @@ const documents = {
     "mutation CartCreate($total: Int!) {\n  createOrder(data: {total: $total}) {\n    ...Cart\n  }\n}": types.CartCreateDocument,
     "query CartGetById($id: ID!) {\n  order(where: {id: $id}) {\n    ...Cart\n  }\n}": types.CartGetByIdDocument,
     "fragment Cart on Order {\n  id\n  total\n  orderItems {\n    id\n    product {\n      id\n      name\n      price\n    }\n    quantity\n    total\n  }\n}": types.CartFragmentDoc,
-    "mutation CartPublish($id: ID!) {\n  publishOrder(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}": types.CartPublishDocument,
+    "mutation CartPublish($id: ID!) {\n  publishOrder(where: {id: $id}, to: PUBLISHED) {\n    ...Cart\n  }\n}": types.CartPublishDocument,
     "query DogGetById($id: ID!) {\n  dog(where: {id: $id}) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogGetByIdDocument,
     "query DogsGetList($first: Int, $skip: Int) {\n  dogs(first: $first, skip: $skip) {\n    id\n    name\n    breed\n    price\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.DogsGetListDocument,
     "mutation OrderItemCreate($cartId: ID!, $productId: ID!, $total: Int!) {\n  createOrderItem(\n    data: {quantity: 1, total: $total, orderId: {connect: {id: $cartId}}, product: {connect: {id: $productId}}}\n  ) {\n    id\n  }\n}": types.OrderItemCreateDocument,
@@ -43,7 +43,7 @@ export function graphql(source: "fragment Cart on Order {\n  id\n  total\n  orde
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation CartPublish($id: ID!) {\n  publishOrder(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}"): typeof import('./graphql').CartPublishDocument;
+export function graphql(source: "mutation CartPublish($id: ID!) {\n  publishOrder(where: {id: $id}, to: PUBLISHED) {\n    ...Cart\n  }\n}"): typeof import('./graphql').CartPublishDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -6036,7 +6036,7 @@ export type CartPublishMutationVariables = Exact<{
 }>;
 
 
-export type CartPublishMutation = { publishOrder?: { id: string } | null };
+export type CartPublishMutation = { publishOrder?: { id: string, total?: number | null, orderItems: Array<{ id: string, quantity?: number | null, total?: number | null, product?: { id: string, name?: string | null, price?: number | null } | null }> } | null };
 
 export type DogGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -6173,10 +6173,23 @@ export const CartGetByIdDocument = new TypedDocumentString(`
 export const CartPublishDocument = new TypedDocumentString(`
     mutation CartPublish($id: ID!) {
   publishOrder(where: {id: $id}, to: PUBLISHED) {
-    id
+    ...Cart
   }
 }
-    `) as unknown as TypedDocumentString<CartPublishMutation, CartPublishMutationVariables>;
+    fragment Cart on Order {
+  id
+  total
+  orderItems {
+    id
+    product {
+      id
+      name
+      price
+    }
+    quantity
+    total
+  }
+}`) as unknown as TypedDocumentString<CartPublishMutation, CartPublishMutationVariables>;
 export const DogGetByIdDocument = new TypedDocumentString(`
     query DogGetById($id: ID!) {
   dog(where: {id: $id}) {

@@ -10,9 +10,12 @@ export default async function NavLayout({
 }>) {
   const cartId = cookies().get('cartId')?.value;
   const cart = cartId
-    ? await executeGraphql(CartGetByIdDocument, {
-        id: cartId,
-        status: 'PENDING',
+    ? await executeGraphql({
+        query: CartGetByIdDocument,
+        variables: {
+          id: cartId,
+          status: 'PENDING',
+        },
       })
     : null;
 

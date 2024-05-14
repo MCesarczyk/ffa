@@ -13,19 +13,20 @@ export default async function CartPage() {
     redirect('/');
   }
 
-  const { order: cart } = await executeGraphql(CartGetByIdDocument, {
-    id: cartId,
-    status: 'PENDING',
-    next: {
-      revalidate: 0,
+  const { order: cart } = await executeGraphql({
+    query: CartGetByIdDocument,
+    variables: {
+      id: cartId,
+      status: 'PENDING',
+      next: {
+        revalidate: 0,
+      },
     },
   });
 
   if (!cart) {
     redirect('/');
   }
-
-  console.log(cart);
 
   const onFormSubmit = async () => {
     'use server';
