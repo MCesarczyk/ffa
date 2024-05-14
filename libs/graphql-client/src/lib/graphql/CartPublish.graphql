@@ -1,0 +1,5 @@
+mutation CartPublish($id: ID!) {
+  publishOrder(where: { id: $id }, to: PUBLISHED) {
+    ...Cart
+  }
+}
