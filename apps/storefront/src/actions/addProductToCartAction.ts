@@ -16,7 +16,7 @@ interface Cart {
 }
 
 import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { CartCreateDocument, CartGetByIdDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
 import { changeItemQuantity } from "../app/(with-navigation)/cart/actions";
 
@@ -26,6 +26,9 @@ export async function getOrCreateCart() {
     const { order: cart } = await executeGraphql({
       query: CartGetByIdDocument, variables: {
         id: cartId,
+      },
+      next: {
+        tag: ["cart"]
       }
     });
 
@@ -79,7 +82,6 @@ async function addProductToCart(cart: Cart, productId: string) {
   }
 
   console.log(`Product ${product.id} added to cart`);
-  revalidatePath(`/cart`);
 }
 
 export async function addProductToCartAction(formData: FormData) {
@@ -112,4 +114,5 @@ export async function addProductToCartAction(formData: FormData) {
   }
 
   await addProductToCart(cart, productId as string);
+  revalidateTag("cart");
 }

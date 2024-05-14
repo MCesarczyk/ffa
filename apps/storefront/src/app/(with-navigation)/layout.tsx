@@ -16,6 +16,9 @@ export default async function NavLayout({
           id: cartId,
           status: 'PENDING',
         },
+        next: {
+          tag: ['cart'],
+        },
       })
     : null;
 

@@ -22,6 +22,9 @@ export default async function CartPage() {
         revalidate: 0,
       },
     },
+    next: {
+      tag: ['cart'],
+    },
   });
 
   if (!cart) {
