@@ -1,7 +1,8 @@
 'use client';
 
 import { useOptimistic } from 'react';
-import { changeItemQuantity, removeItem } from './actions';
+import { changeItemQuantity } from './actions';
+import { RemoveButton } from './RemoveButton';
 
 export function UpdateButtons({
   itemId,
@@ -42,14 +43,7 @@ export function UpdateButtons({
       >
         -
       </button>
-      <button
-        className="h-6 w-6"
-        formAction={async () => {
-          await removeItem(itemId);
-        }}
-      >
-        &#x1F5D1;
-      </button>
+      <RemoveButton productId={itemId} />
     </form>
   );
 }
