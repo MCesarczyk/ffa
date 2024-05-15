@@ -18,7 +18,7 @@ interface Cart {
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { CartCreateDocument, CartGetByIdDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
-import { changeItemQuantity } from "../app/(with-navigation)/cart/actions";
+import { changeItemQuantity } from ".";
 
 export async function getOrCreateCart() {
   const cartId = cookies().get("cartId")?.value;
