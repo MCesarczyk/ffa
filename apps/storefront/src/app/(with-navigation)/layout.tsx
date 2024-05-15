@@ -1,28 +1,15 @@
 import Link from 'next/link';
 import { Footer, Menu } from '../../components';
-import { CartGetByIdDocument, executeGraphql } from '@ffa/graphql-client';
-import { cookies } from 'next/headers';
+import { getCart } from '../../actions';
 
 export default async function NavLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cartId = cookies().get('cartId')?.value;
-  const cart = cartId
-    ? await executeGraphql({
-        query: CartGetByIdDocument,
-        variables: {
-          id: cartId,
-          status: 'PENDING',
-        },
-        next: {
-          tag: ['cart'],
-        },
-      })
-    : null;
+  const cart = await getCart();
 
-  const count = cart?.order?.orderItems.length || 0;
+  const count = cart?.orderItems.length || 0;
   return (
     <div className="min-h-screen flex flex-col">
       <Menu>

@@ -17,25 +17,11 @@ interface Cart {
 
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
-import { CartCreateDocument, CartGetByIdDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
-import { changeItemQuantity } from ".";
+import { CartCreateDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
+import { changeItemQuantity, getCart } from ".";
 
 export async function getOrCreateCart() {
-  const cartId = cookies().get("cartId")?.value;
-  if (cartId) {
-    const { order: cart } = await executeGraphql({
-      query: CartGetByIdDocument, variables: {
-        id: cartId,
-      },
-      next: {
-        tag: ["cart"]
-      }
-    });
-
-    if (cart) {
-      return cart;
-    }
-  }
+  const cart = await getCart();
 
   const { createOrder: newCart } = await executeGraphql({ query: CartCreateDocument, variables: { total: 0 } });
   if (!newCart) {
