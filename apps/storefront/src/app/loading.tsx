@@ -1,3 +1,3 @@
-export default function ProductLoading() {
-  return <div aria-busy>loading</div>;
+export default function LoadingPage() {
+  return <div aria-busy>Loading...</div>;
 }
