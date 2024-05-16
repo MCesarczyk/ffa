@@ -14,7 +14,7 @@ export default async function og() {
   return new ImageResponse(
     (
       <div
-        tw="w-full text-white h-full flex flex-col items-center justify-center text-8xl"
+        tw="w-full text-white h-full flex flex-col items-center justify-center"
         style={{
           background: `
 				    linear-gradient(
@@ -26,11 +26,12 @@ export default async function og() {
 				    )`,
         }}
       >
-        <p tw="font-sans uppercase m-0 p-0 text-[101px] leading-4">
+        <h2 tw="font-sans uppercase m-0 p-0 text-8xl leading-4 mb-16">
           Furry Friend Area
+        </h2>
+        <p tw="font-serif m-0 p-0 font-black text-6xl">
+          The best for your dog &#x1F436;
         </p>
-        <p tw="font-serif m-0 p-0 font-black">The best for your dog</p>
-        <p tw="m-0 mt-2">Welcome!</p>
       </div>
     )
   );
