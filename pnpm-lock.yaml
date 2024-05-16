@@ -32,6 +32,9 @@ dependencies:
   stripe:
     specifier: ^15.6.0
     version: 15.6.0
+  stripe-event-types:
+    specifier: ^3.1.0
+    version: 3.1.0(stripe@15.6.0)
   tslib:
     specifier: ^2.3.0
     version: 2.6.2
@@ -17095,6 +17098,14 @@ packages:
     dependencies:
       js-tokens: 9.0.0
     dev: true
+
+  /stripe-event-types@3.1.0(stripe@15.6.0):
+    resolution: {integrity: sha512-jhPNX5FL81QiBFadek3h+PBQKU5Xg3NURTia6tzyqieDStESbvKqOhnA29ECdA1lPB8KSB5/xdK20k6Q1yOejQ==}
+    peerDependencies:
+      stripe: '>=10.0.0'
+    dependencies:
+      stripe: 15.6.0
+    dev: false
 
   /stripe@15.6.0:
     resolution: {integrity: sha512-ARG46eQHMmHspnDpj3QTAH8GyEqtE0nesbzpTtQDT/C9nHvOFYri3mIzHEzArzDcKX7HSleTu2VpYoDZIIH7nA==}
