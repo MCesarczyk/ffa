@@ -1,11 +1,14 @@
+import { type ReactNode } from 'react';
 import Link from 'next/link';
 import { Footer, Menu } from '../../components';
 import { getCart } from '../../actions';
 
 export default async function NavLayout({
   children,
+  modal,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
+  modal: ReactNode;
 }>) {
   const cart = await getCart();
 
@@ -19,6 +22,7 @@ export default async function NavLayout({
         {children}
       </main>
       <Footer />
+      {modal}
     </div>
   );
 }
