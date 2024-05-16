@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { ProductListItem } from '../../../../components/productListItem';
-import { ProductDto } from '../../../../products/types';
+import { type ProductDto } from '../../../../products/types';
 import { getProducts } from '../../../../products/api';
 
 export async function ProductsList({ page }: { page: number }) {

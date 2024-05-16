@@ -2,9 +2,9 @@ export const dynamic = 'force-dynamic';
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { CartGetByIdDocument, executeGraphql } from '@ffa/graphql-client';
 import { formatMoney } from '../../../utils';
 import { UpdateButtons } from './UpdateButtons';
+import { getCart } from '../../../actions';
 
 export default async function CartPage() {
   const cartId = cookies().get('cartId')?.value;
@@ -13,19 +13,7 @@ export default async function CartPage() {
     redirect('/');
   }
 
-  const { order: cart } = await executeGraphql({
-    query: CartGetByIdDocument,
-    variables: {
-      id: cartId,
-      status: 'PENDING',
-      next: {
-        revalidate: 0,
-      },
-    },
-    next: {
-      tag: ['cart'],
-    },
-  });
+  const cart = await getCart();
 
   if (!cart) {
     redirect('/');

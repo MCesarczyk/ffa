@@ -1,6 +1,6 @@
+import { ComponentProps } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { ProductListItem } from './ProductListItem';
-import { ComponentProps } from 'react';
 
 const meta = {
   component: ProductListItem,

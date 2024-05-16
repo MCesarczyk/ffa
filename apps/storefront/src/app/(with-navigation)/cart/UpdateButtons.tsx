@@ -1,7 +1,7 @@
 'use client';
 
 import { useOptimistic } from 'react';
-import { changeItemQuantity } from './actions';
+import { changeItemQuantity } from '../../../actions';
 import { RemoveButton } from './RemoveButton';
 
 export function UpdateButtons({

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import NextImage from 'next/image';
 import { getProduct } from '../../../../products/api';
-import { addProductToCartAction } from '../../../../actions/addProductToCartAction';
+import { addProductToCartAction } from '../../../../actions/cartAddProduct';
 
 export async function generateMetadata({
   params,

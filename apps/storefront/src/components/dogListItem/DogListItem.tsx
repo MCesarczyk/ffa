@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { CoverImage } from '../coverImage';
 import { DogListItemDescription } from './DogListItemDescription';
-import { DogDto } from '../../dogs/types';
+import { type DogDto } from '../../dogs/types';
 
 interface DogListItemProps {
   dog: DogDto;

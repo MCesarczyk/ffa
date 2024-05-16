@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { DogListItem } from '../../../components/dogListItem';
-import { DogDto } from '../../../dogs/types';
+import { type DogDto } from '../../../dogs/types';
 import { getDogs } from '../../../dogs/api';
 
 export default async function Home() {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
+import { type ProductDto } from '../../products/types';
 import { CoverImage } from '../coverImage';
-import { ProductDto } from '../../products/types';
 import { ProductListItemDescription } from './ProductListItemDescription';
 
 interface ProductListItemProps {
