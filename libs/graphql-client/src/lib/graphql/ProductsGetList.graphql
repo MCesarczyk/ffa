@@ -4,7 +4,10 @@ query ProductsGetList($first: Int, $skip: Int) {
     name
     description
     price
-    category
+    category {
+      id
+      name
+    }
     image {
       id
       url

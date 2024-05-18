@@ -3,7 +3,10 @@ export type ProductDto = {
   name: string;
   price: number;
   description: string;
-  category: string;
+  category: {
+    id: string;
+    name: string;
+  };
   image: {
     url: string;
     fileName: string;
