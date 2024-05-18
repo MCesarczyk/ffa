@@ -1,4 +1,4 @@
-import { ReactNode, Suspense } from 'react';
+import { type ReactNode, Suspense } from 'react';
 import { ProductsList } from './[pageId]/ProductsList';
 
 export default async function ProductsLayout({

@@ -6814,21 +6814,6 @@ export type CategoriesGetListQueryVariables = Exact<{
 
 export type CategoriesGetListQuery = { categories: Array<{ id: string, name?: string | null, slug?: string | null, cover?: { id: string, fileName: string, url: string } | null }> };
 
-export type DogGetByIdQueryVariables = Exact<{
-  id: Scalars['ID']['input'];
-}>;
-
-
-export type DogGetByIdQuery = { dog?: { id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, url: string, fileName: string } | null } | null };
-
-export type DogsGetListQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type DogsGetListQuery = { dogs: Array<{ id: string, name?: string | null, breed?: string | null, price?: number | null, image?: { id: string, url: string, fileName: string } | null }> };
-
 export type OrderItemCreateMutationVariables = Exact<{
   cartId: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
@@ -6980,36 +6965,6 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
-export const DogGetByIdDocument = new TypedDocumentString(`
-    query DogGetById($id: ID!) {
-  dog(where: {id: $id}) {
-    id
-    name
-    breed
-    price
-    image {
-      id
-      url
-      fileName
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<DogGetByIdQuery, DogGetByIdQueryVariables>;
-export const DogsGetListDocument = new TypedDocumentString(`
-    query DogsGetList($first: Int, $skip: Int) {
-  dogs(first: $first, skip: $skip) {
-    id
-    name
-    breed
-    price
-    image {
-      id
-      url
-      fileName
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<DogsGetListQuery, DogsGetListQueryVariables>;
 export const OrderItemCreateDocument = new TypedDocumentString(`
     mutation OrderItemCreate($cartId: ID!, $productId: ID!, $total: Int!) {
   createOrderItem(

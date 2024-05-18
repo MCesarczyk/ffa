@@ -1,7 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { Route } from 'next';
+import { type ReactNode } from 'react';
+import { type Route } from 'next';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

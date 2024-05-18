@@ -5,4 +5,3 @@ export * from './navItem';
 export * from './productListItem';
 export * from './overlay';
 export * from './coverImage';
-export * from './dogListItem';
