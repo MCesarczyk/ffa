@@ -6814,6 +6814,15 @@ export type CategoriesGetListQueryVariables = Exact<{
 
 export type CategoriesGetListQuery = { categories: Array<{ id: string, name?: string | null, slug?: string | null, cover?: { id: string, fileName: string, url: string } | null }> };
 
+export type CategoryGetBySlugWithProductsListQueryVariables = Exact<{
+  categorySlug: Scalars['String']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CategoryGetBySlugWithProductsListQuery = { categories: Array<{ id: string, name?: string | null, slug?: string | null, description?: string | null, products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null }> }> };
+
 export type OrderItemCreateMutationVariables = Exact<{
   cartId: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
@@ -6853,6 +6862,8 @@ export type ProductGetByIdQueryVariables = Exact<{
 
 export type ProductGetByIdQuery = { product?: { id: string, name?: string | null, description?: string | null, longDescription?: string | null, price?: number | null, rating?: number | null, rateCount?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null } | null };
 
+export type ProductListItemFragment = { id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null };
+
 export type ProductsGetListQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
@@ -6860,17 +6871,6 @@ export type ProductsGetListQueryVariables = Exact<{
 
 
 export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null }> };
-
-export type ProductsListGetByCategoryQueryVariables = Exact<{
-  categoryId: Scalars['ID']['input'];
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type ProductsListGetByCategoryQuery = { categories: Array<{ products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null }> }> };
-
-export type ProductListItemFragment = { id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -6993,6 +6993,33 @@ export const CategoriesGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
+export const CategoryGetBySlugWithProductsListDocument = new TypedDocumentString(`
+    query CategoryGetBySlugWithProductsList($categorySlug: String!, $first: Int, $skip: Int) {
+  categories(where: {slug: $categorySlug}) {
+    id
+    name
+    slug
+    description
+    products(first: $first, skip: $skip) {
+      ...ProductListItem
+    }
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  price
+  category {
+    id
+    name
+  }
+  image {
+    id
+    url
+    fileName
+  }
+}`) as unknown as TypedDocumentString<CategoryGetBySlugWithProductsListQuery, CategoryGetBySlugWithProductsListQueryVariables>;
 export const OrderItemCreateDocument = new TypedDocumentString(`
     mutation OrderItemCreate($cartId: ID!, $productId: ID!, $total: Int!) {
   createOrderItem(
@@ -7067,26 +7094,3 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     fileName
   }
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
-export const ProductsListGetByCategoryDocument = new TypedDocumentString(`
-    query ProductsListGetByCategory($categoryId: ID!, $first: Int, $skip: Int) {
-  categories(where: {id: $categoryId}, first: $first, skip: $skip) {
-    products {
-      ...ProductListItem
-    }
-  }
-}
-    fragment ProductListItem on Product {
-  id
-  name
-  description
-  price
-  category {
-    id
-    name
-  }
-  image {
-    id
-    url
-    fileName
-  }
-}`) as unknown as TypedDocumentString<ProductsListGetByCategoryQuery, ProductsListGetByCategoryQueryVariables>;

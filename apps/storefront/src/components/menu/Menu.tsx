@@ -14,8 +14,7 @@ export const Menu = ({ categories, children }: MenuProps) => {
         <NavItem url="/">&#128054;</NavItem>
         <NavItem url="/products">All accessories</NavItem>
         {categories.map((category) => (
-          // <NavItem key={category.id} url={`/categories/${category.id}`}>
-          <NavItem key={category.id} url={`/products`}>
+          <NavItem key={category.id} url={`/category/${category.slug}`}>
             {category.name}
           </NavItem>
         ))}

@@ -1,3 +1,5 @@
+import { type ProductDto } from "../products/types";
+
 export interface CategoryDto {
   id: string;
   name: string;
@@ -7,4 +9,11 @@ export interface CategoryDto {
     fileName: string;
     id: string;
   };
+}
+
+export interface CategoryWithProductsListDto {
+  id: string;
+  name: string;
+  slug: string;
+  products: ProductDto[];
 }

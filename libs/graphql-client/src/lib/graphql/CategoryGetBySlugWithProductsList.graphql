@@ -1,0 +1,15 @@
+query CategoryGetBySlugWithProductsList(
+  $categorySlug: String!
+  $first: Int
+  $skip: Int
+) {
+  categories(where: { slug: $categorySlug }) {
+    id
+    name
+    slug
+    description
+    products(first: $first, skip: $skip) {
+      ...ProductListItem
+    }
+  }
+}

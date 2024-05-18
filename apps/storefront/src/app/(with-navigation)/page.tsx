@@ -17,8 +17,7 @@ export default async function HomePage() {
         </li>
         {category.map((category) => (
           <li key={category.id}>
-            {/* <Link href={`/category/${category.id}`}> */}
-            <Link href="/products/1">
+            <Link href={`/category/${category.slug}`}>
               <h2 className="text-3xl font-bold text-center">
                 {category.name}
               </h2>
