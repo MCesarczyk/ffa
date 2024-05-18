@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Overlay } from '../../../../components';
-import { getCart } from '../../../../actions';
+import { getCart } from '../../../../cart/actions';
 import { Cart } from '../../cart/Cart';
 
 export default async function ModalCart() {

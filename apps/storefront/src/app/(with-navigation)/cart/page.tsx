@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getCart } from '../../../actions';
+import { getCart } from '../../../cart/actions';
 import { Cart } from './Cart';
 
 export default async function CartPage() {

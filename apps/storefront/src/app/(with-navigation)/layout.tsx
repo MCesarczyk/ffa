@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import Link from 'next/link';
-import { getCart } from '../../actions';
+import { getCart } from '../../cart/actions';
 import { Footer, Menu } from '../../components';
 import { getCategories } from '../../categories/api';
 
