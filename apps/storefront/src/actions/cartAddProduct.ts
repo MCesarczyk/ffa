@@ -22,6 +22,9 @@ import { changeItemQuantity, getCart } from ".";
 
 export async function getOrCreateCart() {
   const cart = await getCart();
+  if (cart) {
+    return cart;
+  }
 
   const { createOrder: newCart } = await executeGraphql({ query: CartCreateDocument, variables: { total: 0 } });
   if (!newCart) {
