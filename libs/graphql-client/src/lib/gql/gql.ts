@@ -24,7 +24,9 @@ const documents = {
     "mutation OrderItemPublish($id: ID!) {\n  publishOrderItem(where: {id: $id}, to: PUBLISHED) {\n    id\n  }\n}": types.OrderItemPublishDocument,
     "mutation OrderItemUpdateQuantity($id: ID!, $quantity: Int!, $total: Int!) {\n  updateOrderItem(where: {id: $id}, data: {quantity: $quantity, total: $total}) {\n    quantity\n    total\n  }\n}": types.OrderItemUpdateQuantityDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    id\n    name\n    description\n    longDescription\n    price\n    category {\n      id\n      name\n    }\n    image {\n      id\n      url\n      fileName\n    }\n    rating\n    rateCount\n  }\n}": types.ProductGetByIdDocument,
-    "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    price\n    category {\n      id\n      name\n    }\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsListGetByCategory($categoryId: ID!, $first: Int, $skip: Int) {\n  categories(where: {id: $categoryId}, first: $first, skip: $skip) {\n    products {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsListGetByCategoryDocument,
+    "fragment ProductListItem on Product {\n  id\n  name\n  description\n  price\n  category {\n    id\n    name\n  }\n  image {\n    id\n    url\n    fileName\n  }\n}": types.ProductListItemFragmentDoc,
 };
 
 /**
@@ -70,7 +72,15 @@ export function graphql(source: "query ProductGetById($id: ID!) {\n  product(whe
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    id\n    name\n    description\n    price\n    category {\n      id\n      name\n    }\n    image {\n      id\n      url\n      fileName\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($first: Int, $skip: Int) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ProductsListGetByCategory($categoryId: ID!, $first: Int, $skip: Int) {\n  categories(where: {id: $categoryId}, first: $first, skip: $skip) {\n    products {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsListGetByCategoryDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment ProductListItem on Product {\n  id\n  name\n  description\n  price\n  category {\n    id\n    name\n  }\n  image {\n    id\n    url\n    fileName\n  }\n}"): typeof import('./graphql').ProductListItemFragmentDoc;
 
 
 export function graphql(source: string) {

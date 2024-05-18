@@ -6861,6 +6861,17 @@ export type ProductsGetListQueryVariables = Exact<{
 
 export type ProductsGetListQuery = { products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null }> };
 
+export type ProductsListGetByCategoryQueryVariables = Exact<{
+  categoryId: Scalars['ID']['input'];
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type ProductsListGetByCategoryQuery = { categories: Array<{ products: Array<{ id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null }> }> };
+
+export type ProductListItemFragment = { id: string, name?: string | null, description?: string | null, price?: number | null, category?: { id: string, name?: string | null } | null, image?: { id: string, url: string, fileName: string } | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -6891,6 +6902,23 @@ export const CartFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"Cart"}) as unknown as TypedDocumentString<CartFragment, unknown>;
+export const ProductListItemFragmentDoc = new TypedDocumentString(`
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  price
+  category {
+    id
+    name
+  }
+  image {
+    id
+    url
+    fileName
+  }
+}
+    `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
 export const CartCreateDocument = new TypedDocumentString(`
     mutation CartCreate($total: Int!) {
   createOrder(data: {total: $total}) {
@@ -7021,19 +7049,44 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($first: Int, $skip: Int) {
   products(first: $first, skip: $skip) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  price
+  category {
     id
     name
-    description
-    price
-    category {
-      id
-      name
-    }
-    image {
-      id
-      url
-      fileName
+  }
+  image {
+    id
+    url
+    fileName
+  }
+}`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const ProductsListGetByCategoryDocument = new TypedDocumentString(`
+    query ProductsListGetByCategory($categoryId: ID!, $first: Int, $skip: Int) {
+  categories(where: {id: $categoryId}, first: $first, skip: $skip) {
+    products {
+      ...ProductListItem
     }
   }
 }
-    `) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+    fragment ProductListItem on Product {
+  id
+  name
+  description
+  price
+  category {
+    id
+    name
+  }
+  image {
+    id
+    url
+    fileName
+  }
+}`) as unknown as TypedDocumentString<ProductsListGetByCategoryQuery, ProductsListGetByCategoryQueryVariables>;

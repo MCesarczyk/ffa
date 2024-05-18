@@ -1,0 +1,10 @@
+query ProductsListGetByCategory($categoryId: ID!, $first: Int, $skip: Int) {
+  categories(where: { id: $categoryId }, first: $first, skip: $skip) {
+    id
+    name
+    description
+    products {
+      ...ProductListItem
+    }
+  }
+}

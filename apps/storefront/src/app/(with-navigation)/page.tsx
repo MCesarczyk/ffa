@@ -11,7 +11,7 @@ export default async function HomePage() {
       <ul className="grid md:grid-cols-2 gap-8 m-8">
         <li>
           <Link href="/products/1">
-            <h2 className="text-3xl font-bold text-center">Accessories</h2>
+            <h2 className="text-3xl font-bold text-center">All accessories</h2>
             <CoverImage src="/stuff.avif" alt="dog stuff" />
           </Link>
         </li>
