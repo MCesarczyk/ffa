@@ -60,8 +60,10 @@ export function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: 'http://localhost:4200/cart/success',
+        return_url:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:4200/cart/success'
+            : process.env.NEXT_PUBLIC_STRIPE_SUCCESS_URL || '',
       },
     });
 
