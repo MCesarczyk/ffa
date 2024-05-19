@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { type Route } from 'next';
 import { NavItem } from '../navItem';
 import { type CategoryDto } from '../../categories/types';
 
@@ -14,12 +15,15 @@ export const Menu = ({ categories, children }: MenuProps) => {
         <NavItem url="/">&#128054;</NavItem>
         <NavItem url="/products">All accessories</NavItem>
         {categories.map((category) => (
-          <NavItem key={category.id} url={`/category/${category.slug}`}>
+          <NavItem
+            key={category.id}
+            url={`/category/${category.slug}` as Route<string>}
+          >
             {category.name}
           </NavItem>
         ))}
       </ul>
-      <div className="mx-2 text-white">{children}</div>
+      <div className="mx-2 text-white flex items-center gap-2">{children}</div>
     </nav>
   );
 };
