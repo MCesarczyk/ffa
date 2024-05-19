@@ -1,0 +1,5 @@
+query CartGetByEmail($email: String!) {
+  orders(where: { userEmail: $email }, orderBy: updatedAt_DESC) {
+    ...Cart
+  }
+}

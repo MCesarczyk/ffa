@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
 import Stripe from 'stripe';
 import { StripeForm } from './StripeForm';
-import { getCart } from '../../../../cart/actions';
+import { getCartById } from '../../../../cart/actions';
 
 export default async function PaymentPage() {
-  const cart = await getCart();
+  const cart = await getCartById();
   if (!cart) {
     redirect('/');
   }

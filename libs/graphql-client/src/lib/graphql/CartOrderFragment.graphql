@@ -1,5 +1,9 @@
 fragment Cart on Order {
   id
+  userName
+  userEmail
+  updatedAt
+  createdAt
   total
   orderItems {
     id

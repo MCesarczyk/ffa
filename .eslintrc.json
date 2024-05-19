@@ -35,6 +35,11 @@
           {
             "name": "next/router",
             "message": "Please use `next/navigation` instead."
+          },
+          "error",
+          {
+            "name": "@clerk/nextjs/dist/types/server",
+            "message": "Please use `@clerk/nextjs/server` instead."
           }
         ],
         "@typescript-eslint/consistent-type-imports": [

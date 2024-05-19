@@ -14,9 +14,10 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "mutation CartCreate($total: Int!) {\n  createOrder(data: {total: $total}) {\n    ...Cart\n  }\n}": types.CartCreateDocument,
+    "mutation CartCreate($userName: String!, $userEmail: String!, $total: Int!) {\n  createOrder(data: {userName: $userName, userEmail: $userEmail, total: $total}) {\n    ...Cart\n  }\n}": types.CartCreateDocument,
+    "query CartGetByEmail($email: String!) {\n  orders(where: {userEmail: $email}, orderBy: updatedAt_DESC) {\n    ...Cart\n  }\n}": types.CartGetByEmailDocument,
     "query CartGetById($id: ID!) {\n  order(where: {id: $id}) {\n    ...Cart\n  }\n}": types.CartGetByIdDocument,
-    "fragment Cart on Order {\n  id\n  total\n  orderItems {\n    id\n    product {\n      id\n      name\n      price\n    }\n    quantity\n    total\n  }\n}": types.CartFragmentDoc,
+    "fragment Cart on Order {\n  id\n  userName\n  userEmail\n  updatedAt\n  createdAt\n  total\n  orderItems {\n    id\n    product {\n      id\n      name\n      price\n    }\n    quantity\n    total\n  }\n}": types.CartFragmentDoc,
     "mutation CartPublish($id: ID!) {\n  publishOrder(where: {id: $id}, to: PUBLISHED) {\n    ...Cart\n  }\n}": types.CartPublishDocument,
     "query CategoriesGetList($first: Int, $skip: Int) {\n  categories(first: $first, skip: $skip) {\n    id\n    name\n    slug\n    cover {\n      id\n      fileName\n      url\n    }\n  }\n}": types.CategoriesGetListDocument,
     "query CategoryGetBySlugWithProductsList($categorySlug: String!, $first: Int, $skip: Int) {\n  categories(where: {slug: $categorySlug}) {\n    id\n    name\n    slug\n    description\n    products(first: $first, skip: $skip) {\n      ...ProductListItem\n    }\n  }\n}": types.CategoryGetBySlugWithProductsListDocument,
@@ -32,7 +33,11 @@ const documents = {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation CartCreate($total: Int!) {\n  createOrder(data: {total: $total}) {\n    ...Cart\n  }\n}"): typeof import('./graphql').CartCreateDocument;
+export function graphql(source: "mutation CartCreate($userName: String!, $userEmail: String!, $total: Int!) {\n  createOrder(data: {userName: $userName, userEmail: $userEmail, total: $total}) {\n    ...Cart\n  }\n}"): typeof import('./graphql').CartCreateDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query CartGetByEmail($email: String!) {\n  orders(where: {userEmail: $email}, orderBy: updatedAt_DESC) {\n    ...Cart\n  }\n}"): typeof import('./graphql').CartGetByEmailDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -40,7 +45,7 @@ export function graphql(source: "query CartGetById($id: ID!) {\n  order(where: {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment Cart on Order {\n  id\n  total\n  orderItems {\n    id\n    product {\n      id\n      name\n      price\n    }\n    quantity\n    total\n  }\n}"): typeof import('./graphql').CartFragmentDoc;
+export function graphql(source: "fragment Cart on Order {\n  id\n  userName\n  userEmail\n  updatedAt\n  createdAt\n  total\n  orderItems {\n    id\n    product {\n      id\n      name\n      price\n    }\n    quantity\n    total\n  }\n}"): typeof import('./graphql').CartFragmentDoc;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

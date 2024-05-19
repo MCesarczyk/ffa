@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import NextImage from 'next/image';
+import { currentUser } from '@clerk/nextjs/server';
 import { getProduct } from '../../../../products/api';
-import { addProductToCartAction } from '../../../../cart/actions/cartAddProduct';
+import { addProductToCartAction } from '../../../../cart/actions';
 
 export async function generateMetadata({
   params,
@@ -23,6 +24,12 @@ export default async function SingleProductPage({
 }) {
   const product = await getProduct(params.productId);
 
+  const user = await currentUser();
+  const email = user?.emailAddresses[0]?.emailAddress;
+  const name = user?.fullName;
+
+  console.log(email, name);
+
   return (
     <main className="mx-auto max-w-xl flex flex-col gap-4">
       <div className="flex flex-col md:flex-row gap-2 justify-between">
@@ -30,6 +37,8 @@ export default async function SingleProductPage({
           {product.name}
         </h1>
         <form action={addProductToCartAction}>
+          <input value={email || undefined} name="userEmail" hidden />
+          <input value={name || undefined} name="userName" hidden />
           <input
             type="text"
             name="productId"
