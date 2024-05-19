@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import NextImage from 'next/image';
+import { currentUser } from '@clerk/nextjs/server';
 import { getProduct } from '../../../../products/api';
-import { addProductToCartAction } from '../../../../cart/actions/cartAddProduct';
+import { addProductToCartAction } from '../../../../cart/actions';
 
 export async function generateMetadata({
   params,
@@ -22,6 +23,12 @@ export default async function SingleProductPage({
   params: { productId: string };
 }) {
   const product = await getProduct(params.productId);
+
+  const user = await currentUser();
+  const email = user?.emailAddresses[0]?.emailAddress;
+  const name = user?.fullName;
+
+  console.log(email, name);
 
   return (
     <main className="mx-auto max-w-xl flex flex-col gap-4">

@@ -3,11 +3,11 @@
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { CartCreateDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
-import { changeItemQuantity, getCart } from ".";
+import { changeItemQuantity, getCartById } from ".";
 import { type CartDto } from "../types";
 
 export async function getOrCreateCart() {
-  const cart = await getCart();
+  const cart = await getCartById();
   if (cart) {
     return cart;
   }

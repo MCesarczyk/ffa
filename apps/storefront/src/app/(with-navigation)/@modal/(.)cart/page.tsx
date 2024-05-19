@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Overlay } from '../../../../components';
-import { getCart } from '../../../../cart/actions';
+import { getCartById } from '../../../../cart/actions';
 import { Cart } from '../../cart/Cart';
 
 export default async function ModalCart() {
@@ -11,7 +11,7 @@ export default async function ModalCart() {
     redirect('/');
   }
 
-  const cart = await getCart();
+  const cart = await getCartById();
 
   if (!cart) {
     redirect('/');

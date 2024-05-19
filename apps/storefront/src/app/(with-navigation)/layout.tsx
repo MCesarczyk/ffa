@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import Link from 'next/link';
-import { getCart } from '../../cart/actions';
+import { getCartById } from '../../cart/actions';
 import { Footer, Menu } from '../../components';
 import { getCategories } from '../../categories/api';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
@@ -12,7 +12,7 @@ export default async function NavLayout({
   children: ReactNode;
   modal: ReactNode;
 }>) {
-  const cart = await getCart();
+  const cart = await getCartById();
   const categories = await getCategories();
 
   const count = cart?.orderItems.length || 0;

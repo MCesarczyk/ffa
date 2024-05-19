@@ -3,7 +3,7 @@
 import { CartGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
 import { cookies } from "next/headers";
 
-export const getCart = async () => {
+export const getCartById = async () => {
   const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {

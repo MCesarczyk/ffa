@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getCart } from '../../../cart/actions';
+import { getCartById } from '../../../cart/actions';
 import { Cart } from './Cart';
 
 export default async function CartPage() {
@@ -12,7 +12,7 @@ export default async function CartPage() {
     redirect('/');
   }
 
-  const cart = await getCart();
+  const cart = await getCartById();
 
   if (!cart) {
     redirect('/');
