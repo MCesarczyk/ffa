@@ -1,30 +1,27 @@
-// export default function CartModalPage() {
-//   return (
-//       <ul>
-//         <li>Product 1</li>
-//         <li>Product 2</li>
-//         <li>Product 3</li>
-//       </ul>
-//     </div>
-//   );
-// }
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { Overlay } from '../../../../components';
-import { getCart } from '../../../../actions';
+import { getCart } from '../../../../cart/actions';
+import { Cart } from '../../cart/Cart';
 
 export default async function ModalCart() {
+  const cartId = cookies().get('cartId')?.value;
+
+  if (!cartId) {
+    redirect('/');
+  }
+
   const cart = await getCart();
+
+  if (!cart) {
+    redirect('/');
+  }
 
   return (
     <>
       <Overlay />
-      {/* <div className="absolute right-0 top-0 z-40 h-screen w-full max-w-sm bg-white"> */}
       <div className="absolute right-0 top-0 z-50 h-full w-full max-w-sm bg-white opacity-70 text-black p-8">
-        <h2 className="text-3xl text-black p-8">Cart</h2>
-        <ul>
-          {cart?.orderItems.map((item) => (
-            <li key={item.id}>{item.product?.name}</li>
-          ))}
-        </ul>
+        <Cart cart={cart} />
       </div>
     </>
   );

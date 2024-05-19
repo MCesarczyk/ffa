@@ -1,27 +1,16 @@
 "use server";
 
-interface Cart {
-  id: string;
-  total?: number | null | undefined;
-  orderItems: {
-    id: string;
-    quantity?: number | null | undefined;
-    total?: number | null | undefined;
-    product?: {
-      id: string;
-      name?: string | null | undefined;
-      price?: number | null | undefined;
-    } | null | undefined;
-  }[];
-}
-
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { CartCreateDocument, CartPublishDocument, OrderItemCreateDocument, OrderItemPublishDocument, ProductGetByIdDocument, executeGraphql } from "@ffa/graphql-client";
 import { changeItemQuantity, getCart } from ".";
+import { type CartDto } from "../types";
 
 export async function getOrCreateCart() {
   const cart = await getCart();
+  if (cart) {
+    return cart;
+  }
 
   const { createOrder: newCart } = await executeGraphql({ query: CartCreateDocument, variables: { total: 0 } });
   if (!newCart) {
@@ -39,7 +28,7 @@ export async function getOrCreateCart() {
   return publishedCart;
 }
 
-async function addProductToCart(cart: Cart, productId: string) {
+async function addProductToCart(cart: CartDto, productId: string) {
   const { product } = await executeGraphql({
     query: ProductGetByIdDocument, variables: {
       id: productId,

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-import { ProductsList } from './ProductsList';
 import { getProducts } from '../../../../products/api';
-import { Pagination } from '../../../../components';
+import { Pagination, ProductsList } from '../../../../components';
+import { notFound } from 'next/navigation';
 
 interface ProductsPageProps {
   params: {
@@ -19,16 +19,21 @@ export async function generateStaticParams({ params }: ProductsPageProps) {
 export default async function ProductsPage({
   params: { pageId },
 }: ProductsPageProps) {
-  const results = await getProducts();
-  const totalPages = Math.floor(results.length / 4);
+  const products = await getProducts(Number(pageId), 4);
+  const allProducts = await getProducts();
+  const totalPages = Math.floor(allProducts.length / 4);
+
+  if (!products) {
+    return notFound();
+  }
 
   return (
     <div>
       <h2 className="mb-4 text-xl font-bold">Products list</h2>
       <Suspense>
-        <ProductsList page={Number(pageId)} />
+        <ProductsList products={products} />
       </Suspense>
-      <Pagination totalPages={totalPages} />
+      <Pagination totalPages={totalPages} path="products" />
     </div>
   );
 }

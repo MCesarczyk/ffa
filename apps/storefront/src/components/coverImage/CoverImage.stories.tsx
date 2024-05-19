@@ -1,6 +1,6 @@
+import { type ComponentProps } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { CoverImage } from './CoverImage';
-import { ComponentProps } from 'react';
 
 const meta = {
   component: CoverImage,

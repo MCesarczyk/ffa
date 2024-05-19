@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { ProductListItem } from './ProductListItem';
 
@@ -17,7 +17,10 @@ const meta = {
     product: {
       id: 'ujfe-op49-3rje-8er8-9iuj',
       name: 'Product name',
-      category: 'Product description',
+      category: {
+        id: 'ujfe-op49-3rje-8er8-9iuj',
+        name: 'Category name',
+      },
       price: 100000,
       image: {
         url: 'https://via.placeholder.com/320',

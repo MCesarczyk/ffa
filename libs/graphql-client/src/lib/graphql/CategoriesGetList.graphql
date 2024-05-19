@@ -1,0 +1,12 @@
+query CategoriesGetList($first: Int, $skip: Int) {
+  categories(first: $first, skip: $skip) {
+    id
+    name
+    slug
+    cover {
+      id
+      fileName
+      url
+    }
+  }
+}

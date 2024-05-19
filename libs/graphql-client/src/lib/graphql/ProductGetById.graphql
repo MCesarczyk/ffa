@@ -5,7 +5,10 @@ query ProductGetById($id: ID!) {
     description
     longDescription
     price
-    category
+    category {
+      id
+      name
+    }
     image {
       id
       url
