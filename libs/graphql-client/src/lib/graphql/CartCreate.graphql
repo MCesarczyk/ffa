@@ -1,5 +1,7 @@
-mutation CartCreate($total: Int!) {
-  createOrder(data: { total: $total }) {
+mutation CartCreate($userName: String!, $userEmail: String!, $total: Int!) {
+  createOrder(
+    data: { userName: $userName, userEmail: $userEmail, total: $total }
+  ) {
     ...Cart
   }
 }

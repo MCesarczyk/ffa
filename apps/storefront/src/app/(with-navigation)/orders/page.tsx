@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { currentUser } from '@clerk/nextjs/server';
 import { getCartByUserEmail } from '../../../cart/actions';
+import Link from 'next/link';
 
 export default async function OrderPage() {
   const user = await currentUser();
@@ -53,6 +54,12 @@ export default async function OrderPage() {
           ))}
         </ul>
       )}
+      <Link
+        className="block text-center bg-blue-300 text-black p-4 rounded-md mt-4 hover:bg-blue-200 focus:bg-blue-400 w-full"
+        href="/cart"
+      >
+        Back to Cart
+      </Link>
     </div>
   );
 }

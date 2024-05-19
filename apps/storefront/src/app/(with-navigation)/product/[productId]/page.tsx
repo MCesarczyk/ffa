@@ -37,6 +37,8 @@ export default async function SingleProductPage({
           {product.name}
         </h1>
         <form action={addProductToCartAction}>
+          <input value={email || undefined} name="userEmail" hidden />
+          <input value={name || undefined} name="userName" hidden />
           <input
             type="text"
             name="productId"

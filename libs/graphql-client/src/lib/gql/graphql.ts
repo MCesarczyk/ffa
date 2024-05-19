@@ -6872,6 +6872,8 @@ export type _SystemDateTimeFieldVariation =
   | 'localization';
 
 export type CartCreateMutationVariables = Exact<{
+  userName: Scalars['String']['input'];
+  userEmail: Scalars['String']['input'];
   total: Scalars['Int']['input'];
 }>;
 
@@ -7019,8 +7021,8 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
 }
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
 export const CartCreateDocument = new TypedDocumentString(`
-    mutation CartCreate($total: Int!) {
-  createOrder(data: {total: $total}) {
+    mutation CartCreate($userName: String!, $userEmail: String!, $total: Int!) {
+  createOrder(data: {userName: $userName, userEmail: $userEmail, total: $total}) {
     ...Cart
   }
 }

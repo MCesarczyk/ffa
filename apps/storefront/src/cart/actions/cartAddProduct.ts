@@ -6,13 +6,13 @@ import { CartCreateDocument, CartPublishDocument, OrderItemCreateDocument, Order
 import { changeItemQuantity, getCartById } from ".";
 import { type CartDto } from "../types";
 
-export async function getOrCreateCart() {
+export async function getOrCreateCart(userName: string, userEmail: string) {
   const cart = await getCartById();
   if (cart) {
     return cart;
   }
 
-  const { createOrder: newCart } = await executeGraphql({ query: CartCreateDocument, variables: { total: 0 } });
+  const { createOrder: newCart } = await executeGraphql({ query: CartCreateDocument, variables: { userName, userEmail, total: 0 } });
   if (!newCart) {
     throw new Error("Failed to create cart");
   }
@@ -60,8 +60,10 @@ async function addProductToCart(cart: CartDto, productId: string) {
 }
 
 export async function addProductToCartAction(formData: FormData) {
+  const userName = formData.get("userName") as string;
+  const userEmail = formData.get("userEmail") as string;
 
-  const cart = await getOrCreateCart();
+  const cart = await getOrCreateCart(userName, userEmail);
   if (!cart) {
     throw new Error("Failed to get or create cart");
   }

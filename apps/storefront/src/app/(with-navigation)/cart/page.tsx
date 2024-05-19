@@ -2,11 +2,15 @@ export const dynamic = 'force-dynamic';
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs/server';
 import { getCartById } from '../../../cart/actions';
 import { Cart } from './Cart';
+import Link from 'next/link';
 
 export default async function CartPage() {
   const cartId = cookies().get('cartId')?.value;
+
+  const user = await currentUser();
 
   if (!cartId) {
     redirect('/');
@@ -32,6 +36,14 @@ export default async function CartPage() {
           Checkout
         </button>
       </form>
+      {user && (
+        <Link
+          className="block text-center bg-blue-300 text-black p-4 rounded-md mt-4 hover:bg-blue-200 focus:bg-blue-400 w-full"
+          href="/orders"
+        >
+          View Orders
+        </Link>
+      )}
     </div>
   );
 }
