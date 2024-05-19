@@ -33,7 +33,7 @@ export default async function ProductsPage({
       <Suspense>
         <ProductsList products={products} />
       </Suspense>
-      <Pagination totalPages={totalPages} />
+      <Pagination totalPages={totalPages} path="products" />
     </div>
   );
 }

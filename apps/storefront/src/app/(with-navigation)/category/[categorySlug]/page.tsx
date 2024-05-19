@@ -1,6 +1,4 @@
-import { notFound } from 'next/navigation';
-import { getCategoryDetailsWithProductsListBySlug } from '../../../../categories/api';
-import { ProductsList } from '../../../../components';
+import { redirect } from 'next/navigation';
 
 interface CategoryPageProps {
   params: {
@@ -8,24 +6,10 @@ interface CategoryPageProps {
   };
 }
 
-export default async function CategoryPage({
+export default function CategoryPage({
   params: { categorySlug },
 }: CategoryPageProps) {
-  const categories = await getCategoryDetailsWithProductsListBySlug(
-    categorySlug,
-    10
-  );
+  redirect(`/category/${categorySlug}/1`);
 
-  if (!categories) {
-    return notFound();
-  }
-
-  const category = categories[0];
-
-  return (
-    <div>
-      <h1>{category.name}</h1>
-      <ProductsList products={category.products} />
-    </div>
-  );
+  return null;
 }

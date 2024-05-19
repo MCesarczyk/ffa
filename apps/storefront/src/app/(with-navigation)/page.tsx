@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { type Route } from 'next';
 import { CoverImage } from '../../components/coverImage';
 import { getCategories } from '../../categories/api';
 
@@ -17,12 +18,7 @@ export default async function HomePage() {
         </li>
         {category.map((category) => (
           <li key={category.id}>
-            <Link
-              href={{
-                pathname: '/categiry/[categorySlug]',
-                query: { categorySlug: category.slug },
-              }}
-            >
+            <Link href={`/category/${category.slug}` as Route<string>}>
               <h2 className="text-3xl font-bold text-center">
                 {category.name}
               </h2>
